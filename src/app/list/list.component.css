@@ -1,0 +1,28 @@
+.cars {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: inline-block;
+  }
+.cars li {
+    cursor: pointer;
+    background-color: #EEE;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 4px;
+}
+.cars li span {
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}
+.cars li span:first-child {
+    font-weight: bold;
+}
+.cars li:hover {
+    background-color: #DDD;
+}
+.buttons {
+    border-top: 1px solid #d4d4d4;
+    padding-top: 8px;
+}

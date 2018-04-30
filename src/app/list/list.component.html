@@ -1,0 +1,45 @@
+<div class="text-center"><button routerLink='/create' class="btn btn-success">Add new car</button></div><br>
+
+<ul class="cars col-sm-6 col-md-6 col-lg-4" *ngFor="let car of carsOnPage">
+  <li>
+    <span>Brand: {{ car.brand | uppercase}}</span>
+    <span>Model: {{ car.model }} </span>
+    <span>Description: {{ car.description || "N/A" }}</span>
+    <span>Registration number: {{ car.registrationNumber }}</span>
+    <span>FuelType: {{ car.fuelType }}</span>
+    <span>Transmission: {{ car.transmission }}</span>
+    <div class="buttons">
+      <button (click)="openModalConfirmation(content, car)" class="btn btn-sm btn-danger">Delete</button>
+      <button [routerLink]="['/create', car._id]" class="btn btn-sm btn-info">Edit</button>
+    </div>
+  </li>
+</ul>
+<!-- Pagination (show pagination if cars are 10 or more) -->
+<ngb-pagination *ngIf="getCarsLength() > 9"
+                (pageChange)="getCarsForPage($event)" 
+                [rotate]="true" 
+                [maxSize]="maxSize" 
+                [pageSize]="pageSize" 
+                [collectionSize]="getCarsLength()" 
+                [ellipses]="false"
+                [(page)]="page" 
+                aria-label="Default pagination"
+                class="d-flex justify-content-center"></ngb-pagination>
+
+<!-- Modal -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Deleting car</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete the car {{modalDataCar.brand + " " + modalDataCar.model}}?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-danger" (click)="c(removeCar(modalDataCar))">Delete</button>
+  </div>
+</ng-template>
+

@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+  <!-- Create/Edit form -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="col-md-6">
+    <ul>
+      <li>
+        <label for="brand">Brand</label>
+        <input type="text" name="brand" formControlName="brand" class="form-control">
+        <div *ngIf="form.get('brand').hasError('required') && form.get('brand').touched" class="text-danger">
+          Brand is required field
+        </div>
+      </li>
+      <li>
+        <label for="model">Model</label>
+        <input type="text" name="model" formControlName="model" class="form-control">
+        <div *ngIf="form.get('model').hasError('required') && form.get('model').touched" class="text-danger">
+          Model is required field
+        </div>
+      </li>
+      <li>
+        <label for="description">Description</label>
+        <textarea type="text" name="description" formControlName="description" class="form-control"></textarea>
+        <div *ngIf="form.get('description').hasError('maxlength')" class="text-danger">
+          Max length of description should not exceed 200 characters.
+        </div>
+      </li>
+      <li>
+        <label for="registrationNumber">Registration number</label>
+        <input type="text" name="registrationNumber" formControlName="registrationNumber" class="form-control">
+        <div *ngIf="form.get('registrationNumber').hasError('required') && form.get('registrationNumber').touched" class="text-danger">
+          Registration number is required field
+        </div>
+      </li>
+      <li>
+        <label for="fuelType">Fuel type</label>
+        <select formControlName="fuelType" class="form-control">
+          <option value=""></option>
+          <option value="Petrol">Petrol</option>
+          <option value="Diesel">Diesel</option>
+          <option value="Electric">Electric</option>
+        </select>
+        <div *ngIf="form.get('fuelType').hasError('required') && form.get('fuelType').touched" class="text-danger">
+          Fuel type is required field
+        </div>
+      </li>
+      <li>
+        <label for="transmission">Transmission</label>
+        <select formControlName="transmission" class="form-control">
+          <option value=""></option>
+          <option value="Manual">Manual</option>
+          <option value="Automatic">Automatic</option>
+          <option value="Semi-Automatic">Semi-Automatic</option>
+        </select>
+        <div *ngIf="form.get('transmission').hasError('required') && form.get('transmission').touched" class="text-danger">
+          Transmission is required field
+        </div>
+      </li>
+    </ul> 
+    <div class="text-center">
+      <!-- Alert message on added/edited car -->
+      <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = false"><strong>Success!</strong></ngb-alert>
+      <button type="button" routerLink='/list' class="btn btn-info">< Back to list</button>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-success"> {{ form_action }} </button>
+    </div>
+  </form>
+</div>
